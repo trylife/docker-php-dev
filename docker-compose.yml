@@ -1,0 +1,44 @@
+version: '2.1'
+
+services:
+  php71:
+    image: trylife/phpdev:7.1-fpm
+    command:  php -S 0.0.0.0:80 -t www
+    environment:
+      - docker=true
+      - TZ=Asia/Shanghai
+    ports:
+      - 9090:80
+    volumes:
+      - ./{your project}:/var/www
+      - ./{your project}/logs:/var/www/logs
+  adminer:
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - 9092:8080
+    image: adminer
+    restart: always
+  redis:
+    image: docker.io/redis:6-alpine
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - 9093:6379
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+  phpRedisAdmin:
+    image: erikdubbelboer/phpredisadmin:latest
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+      - REDIS_1_HOST=redis
+    ports:
+      - 9094:80
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
