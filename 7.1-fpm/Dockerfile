@@ -12,10 +12,12 @@ ADD ./7.1-fpm/php.ini /usr/local/etc/php/conf.d/
 
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install gd
+
 RUN docker-php-ext-install zip mysqli pdo pdo_mysql
+RUN docker-php-ext-install bcmath
 
 RUN pecl channel-update pecl.php.net
-RUN pecl install xdebug
+RUN pecl install xdebug-2.9.8
 ADD ./7.1-fpm/docker-php-ext-xdebug.ini /usr/local/etc/php/conf.d/
 
 ADD ./7.1-fpm/install-composer.sh /var/install/
