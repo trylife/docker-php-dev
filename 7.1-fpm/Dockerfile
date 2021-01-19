@@ -23,7 +23,7 @@ ADD ./7.1-fpm/docker-php-ext-xdebug.ini /usr/local/etc/php/conf.d/
 ADD ./7.1-fpm/install-composer.sh /var/install/
 RUN ["chmod", "+x", "/var/install/install-composer.sh"]
 RUN /var/install/install-composer.sh
-RUN composer config -g repo.packagist composer https://packagist.phpcomposer.com
+# RUN composer config -g repo.packagist composer https://packagist.phpcomposer.com
 
 RUN curl https://phar.phpunit.de/phpunit-7.5.20.phar -o /usr/bin/phpunit && chmod +x /usr/bin/phpunit
 
