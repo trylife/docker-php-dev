@@ -20,6 +20,10 @@ RUN pecl channel-update pecl.php.net
 RUN pecl install xdebug-2.9.8
 ADD ./7.1-fpm/docker-php-ext-xdebug.ini /usr/local/etc/php/conf.d/
 
+# https://github.com/longxinH/xhprof.git
+RUN pecl install xhprof
+ADD ./7.1-fpm/xhprof.ini /usr/local/etc/php/conf.d/
+
 ADD ./7.1-fpm/install-composer.sh /var/install/
 RUN ["chmod", "+x", "/var/install/install-composer.sh"]
 RUN /var/install/install-composer.sh
